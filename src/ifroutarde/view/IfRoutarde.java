@@ -29,8 +29,8 @@ public class IfRoutarde {
         date.set(1991, 8, 14);
         Client jean = new Client ( 7L, "Saint", "Marchal", "Jean", date , "dans ton cul", "jesuisuncon@orange.fr", "9876543210");
         
-        Pays aliciaLand = new Pays (1L, "aliciaLand", "aliciaVille", 2,2);
-        Pays geraldineCountry = new Pays (2L, "geraldineCountry", "geraldineCity", 4, 10);
+        Pays aliciaLand = new Pays ("aliciaLand", "aliciaVille", 2,2, "Anglais");
+        Pays geraldineCountry = new Pays ("geraldineCountry", "geraldineCity", 4, 10, "Québecquois");
             
         ServiceClient serviceTest = new ServiceClient();
         serviceTest.enregistrerClient(alicia);
@@ -42,6 +42,9 @@ public class IfRoutarde {
         ServicePays serviceTest2 = new ServicePays(); 
         serviceTest2.enregistrerPays(aliciaLand);
         serviceTest2.enregistrerPays(geraldineCountry);
+        
+        afficherTousPays(serviceTest2);
+        afficherPaysId(serviceTest2, aliciaLand.getIdPays());
     }
     
     public static void afficherTousClients (ServiceClient unService)
@@ -86,5 +89,33 @@ public class IfRoutarde {
         System.out.println();
     }
     
-    public static void afficher
+    public static void afficherTousPays(ServicePays unService)
+    {
+        List<Pays> resultat = unService.getBackPays();
+        for (int i = 0; i<resultat.size(); i++)
+        {
+            Pays pays = resultat.get(i);
+            String nom = pays.getNom();
+            String capitale = pays.getCapitale();
+            int nbHab = pays.getNbHab();
+            int superf = pays.getSuperficie();
+            String langue = pays.getLangue();
+            
+            System.out.println (nom + " dont la capitale est " + capitale + " ontenant  "+ nbHab + " habitants et d'une taille de " + superf +" km². La langue officielle de " + nom + " est : " + langue);
+        }
+    }
+        
+    public static void afficherPaysId(ServicePays unService, Long unId)
+    {
+        Pays pays = unService.getBackPaysById(unId);
+        
+        String nom = pays.getNom();
+        String capitale = pays.getCapitale();
+        int nbHab = pays.getNbHab();
+        int superf = pays.getSuperficie();
+        String langue = pays.getLangue();
+            
+        System.out.println (nom + " dont la capitale est " + capitale + " ontenant  "+ nbHab + " habitants et d'une taille de " + superf +" km². La langue officielle de " + nom + " est : " + langue);
+    }
+    
 }

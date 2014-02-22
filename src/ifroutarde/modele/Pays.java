@@ -23,19 +23,20 @@ public class Pays {
     private String capitale;
     private int nbHab;
     private int superficie; //La superficie est en km²
+    private String langue;
     
     public Pays()
     {
         
     }
     
-    public Pays(Long unId, String unNom, String uneCapitale, int unNbHab, int uneSuperficie)
+    public Pays(String unNom, String uneCapitale, int unNbHab, int uneSuperficie, String uneLangue)
     {
-        idPays = unId;
         nom = unNom;
         capitale = uneCapitale; 
         nbHab = unNbHab;
         superficie = uneSuperficie; 
+        langue = uneLangue;
     }
 
     public Long getIdPays() {
@@ -56,6 +57,10 @@ public class Pays {
 
     public int getSuperficie() {
         return superficie;
+    }
+
+    public String getLangue() {
+        return langue;
     }
     
         
