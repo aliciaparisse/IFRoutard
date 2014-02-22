@@ -3,12 +3,12 @@
   <persistence-unit name="IfRoutardePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ifroutarde.modele.Client</class>
-    <class>ifroutarde.modele.Pays</class>
+    <class>ifroutarde.modele.Conseiller</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/LaBase"/>
-      <property name="javax.persistence.jdbc.password" value="Guillaud2910"/>
+      <property name="javax.persistence.jdbc.password" value="lol"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.user" value="aparisse"/>
+      <property name="javax.persistence.jdbc.user" value="B3222"/>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
