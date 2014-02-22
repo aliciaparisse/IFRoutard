@@ -4,27 +4,26 @@
  */
 package ifroutarde.service;
 
-import ifroutarde.dao.ClientDao;
-import ifroutarde.dao.ClientDaoJpa;
+import ifroutarde.dao.ConseillerDao;
+import ifroutarde.dao.ConseillerDaoJpa;
 import ifroutarde.dao.JpaUtil;
-import ifroutarde.modele.Client;
+import ifroutarde.modele.Conseiller;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Administasoeur
+ * @author Administrateur
  */
-public class ServiceClient {
+public class ServiceConseiller {
+    private ConseillerDao monsieurDao = new ConseillerDaoJpa();
     
-    private ClientDao mecDao = new ClientDaoJpa();    
-    
-    public void enregistrerClient (Client client)
+    public void enregistrerConseiller (Conseiller conseiller)
     {
         try{
             JpaUtil.creerEntityManager();
             JpaUtil.ouvrirTransaction();
-            mecDao.createClient(client);
+            monsieurDao.createConseiller(conseiller);
             JpaUtil.validerTransaction();
         }
         catch (Exception e) {
@@ -36,12 +35,12 @@ public class ServiceClient {
         }
     }
     
-    public List<Client> getBackClients ()
+    public List<Conseiller> getBackConseillers ()
     {
-        List<Client> resultat = new ArrayList <Client> ();
+        List<Conseiller> resultat = new ArrayList <Conseiller> ();
         try{
             JpaUtil.creerEntityManager();
-            resultat = mecDao.findAllClient();
+            resultat = monsieurDao.findAllConseiller();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -53,12 +52,12 @@ public class ServiceClient {
         return resultat;
     }
     
-    public Client getBackClientById (Long unId)
+    public Conseiller getBackConseillerById (Long unId)
     {
-        Client client = null;
+        Conseiller client = null;
         try{
             JpaUtil.creerEntityManager();
-            client = mecDao.findClientById(unId);
+            client = monsieurDao.findConseillerById(unId);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -70,12 +69,12 @@ public class ServiceClient {
         return client;
     }
     
-    public List<Client> getBackClientByNom (String nomClient)
+    public List<Conseiller> getBackConseillerByNom (String nomConseiller)
     {
-        List<Client> clients = new ArrayList <Client> ();
+        List<Conseiller> conseillers = new ArrayList <Conseiller> ();
         try{
             JpaUtil.creerEntityManager();
-            clients = mecDao.findClientByNomClient(nomClient);
+            conseillers = monsieurDao.findConseillerByNomConseiller(nomConseiller);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -84,6 +83,6 @@ public class ServiceClient {
         finally {
             JpaUtil.fermerEntityManager();
         }
-        return clients;
+        return conseillers;
     }
 }

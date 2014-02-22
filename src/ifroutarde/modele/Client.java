@@ -5,7 +5,6 @@
 package ifroutarde.modele;
 
 import java.util.Calendar;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +31,6 @@ public class Client {
     
     @Temporal(TemporalType.DATE)
     private Calendar dateNaissance;
-    
     private String adresse;
     private String adrMail;
     private String numTel;
@@ -40,9 +38,8 @@ public class Client {
     public Client() {
     }
     
-    public Client (Long unIdClient, String uneCivi, String unNom, String unPrenom, Calendar uneDateNaiss, String uneAdresse, String uneAdrMail, String unNumTel)           
+    public Client (String uneCivi, String unNom, String unPrenom, Calendar uneDateNaiss, String uneAdresse, String uneAdrMail, String unNumTel)           
     {   
-        idClient = unIdClient;
         civilite = uneCivi;
         nom = unNom;
         prenom = unPrenom;

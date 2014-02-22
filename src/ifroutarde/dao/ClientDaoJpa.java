@@ -16,6 +16,7 @@ public class ClientDaoJpa implements ClientDao{
     @Override
     public void createClient ( Client client )
     {
+        
         JpaUtil.obtenirEntityManager().persist(client);
     }
 
