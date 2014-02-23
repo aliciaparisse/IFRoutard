@@ -4,10 +4,14 @@
  */
 package ifroutarde.dao;
 
+import ifroutarde.modele.Circuit;
+
 /**
- *
- * @author alicia
+ * @author Marchal & Parisse
  */
-public class CircuitDao {
+public interface CircuitDao extends VoyageDao{
+    
+    public void createCircuit (Circuit circuit);
+    
     
 }

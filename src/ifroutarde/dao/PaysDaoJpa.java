@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author alicia
+ * @author Marchal & Parisse
  */
 public class PaysDaoJpa implements PaysDao{
 

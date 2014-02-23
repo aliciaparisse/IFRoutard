@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author alicia
+ * @author Marchal & Parisse
  */
 @Entity
 public class Sejour extends Voyage {
@@ -20,9 +20,9 @@ public class Sejour extends Voyage {
     {
     }
     
-    public Sejour (String unNom, String uneDescription, int uneDurée, ArrayList <periodeTarif> desTarifs, String nomResidence)
+    public Sejour (String unNom, String uneDescription, Pays unPays, int uneDurée, ArrayList <periodeTarif> desTarifs, String nomResidence)
     {
-        super (unNom, uneDescription, uneDurée, desTarifs);
+        super (unNom, uneDescription, unPays, uneDurée, desTarifs);
         descResidence = nomResidence;
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author alicia
+ * @author Marchal & Parisse
  */
 public class periodeTarif
 {

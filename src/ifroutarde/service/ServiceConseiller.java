@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Administrateur
+ * @author Marchal & Parisse
  */
 public class ServiceConseiller {
     private ConseillerDao monsieurDao = new ConseillerDaoJpa();

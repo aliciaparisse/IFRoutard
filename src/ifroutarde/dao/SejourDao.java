@@ -6,8 +6,8 @@ package ifroutarde.dao;
 
 /**
  *
- * @author alicia
+ * @author Marchal & Parisse
  */
-public class SejourDao {
+public interface SejourDao {
     
 }

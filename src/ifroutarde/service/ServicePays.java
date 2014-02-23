@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author alicia
+ * @author Marchal & Parisse
  */
 public class ServicePays {
     

@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author Administrateur
+ * @author Marchal & Parisse
  */
 public interface ConseillerDao {
     public void createConseiller (Conseiller conseiller);

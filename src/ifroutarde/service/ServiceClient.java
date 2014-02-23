@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Administasoeur
+ * @author Marchal & Parisse
  */
 public class ServiceClient {
     

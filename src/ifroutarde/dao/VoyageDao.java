@@ -3,17 +3,22 @@
  * and open the template in the editor.
  */
 package ifroutarde.dao;
+
 import ifroutarde.modele.Pays;
+import ifroutarde.modele.Voyage;
 import java.util.List;
+
 /**
  *
  * @author Marchal & Parisse
  */
-public interface PaysDao{
-
-    public void createPays (Pays pays);
+public interface VoyageDao {
+    
+    public void createVoyage (Voyage voyage);
     //Pas de delete et update, juste création car on a pas besoin des services qui s'appuient dessus pour l'interface web du client
-    public List <Pays> findAllPays ();
-    public Pays findPaysById (Long numPays);
-    public List <Pays> findPaysByNomPays (String nomPays);
+    public List <Voyage> findAllVoyage ();
+    public Voyage findVoyageById (Long numVoyage);
+    public List <Voyage> findVoyageByPays (Pays pays);
+    public List <Voyage> findVoyageByNomVoyage (String nomVoyage);
+    
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  *
- * @author Administrateur
+ * @author Marchal & Parisse
  */
 public class IfRoutarde {
 
@@ -50,11 +50,11 @@ public class IfRoutarde {
         ArrayList<periodeTarif> lesTarifs = new ArrayList<periodeTarif> ();
         lesTarifs.add (pT1);
         lesTarifs.add (pT2);
-        Voyage sejour1 = new Sejour ("Patagonie", "Nom magique qui vous transporte et vous permet blabla.", 14, lesTarifs, "Hotel 4 étoiles avec piscine"); 
+        Voyage sejour1 = new Sejour ("Patagonie", "Nom magique qui vous transporte et vous permet blabla.", aliciaLand, 14, lesTarifs, "Hotel 4 étoiles avec piscine"); 
         ArrayList<String> lesTransports = new ArrayList<String> ();
         lesTransports.add("bus");
         lesTransports.add("train");
-        Voyage circuit1 = new Circuit ("De la Patagonie à la Terre de Feu", "Découverte exceptionnelle de gands espaces et paysages", 7, lesTarifs, lesTransports, 700);
+        Voyage circuit1 = new Circuit ("De la Patagonie à la Terre de Feu", "Découverte exceptionnelle de gands espaces et paysages", geraldineCountry, 7, lesTarifs, lesTransports, 700);
         
         //Tests de persistance pour les différentes classes
         

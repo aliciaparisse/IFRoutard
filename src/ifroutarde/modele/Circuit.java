@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author alicia
+ * @author Marchal & Parisse
  */
 @Entity
 public class Circuit extends Voyage 
@@ -22,9 +22,9 @@ public class Circuit extends Voyage
     {   
     }
     
-    public Circuit (String unNom, String uneDescription, int uneDurée, ArrayList<periodeTarif> desTarifs, ArrayList <String> desMoyens, int uneDistance)
+    public Circuit (String unNom, String uneDescription, Pays unPays, int uneDurée, ArrayList<periodeTarif> desTarifs, ArrayList <String> desMoyens, int uneDistance)
     {
-        super (unNom, uneDescription, uneDurée, desTarifs);
+        super (unNom, uneDescription, unPays, uneDurée, desTarifs);
         moyensTransp = desMoyens;
         distance = uneDistance;
     }
