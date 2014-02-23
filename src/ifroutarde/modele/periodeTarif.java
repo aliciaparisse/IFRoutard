@@ -4,10 +4,26 @@
  */
 package ifroutarde.modele;
 
+import java.util.Calendar;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
- *
  * @author alicia
  */
-public class periodeTarif {
-    
+public class periodeTarif
+{
+        public String villeDepart;
+        
+        @Temporal(TemporalType.DATE)
+        public Calendar dateDepart;
+        public int tarif;
+        public String transportAerien;
+        
+        public periodeTarif (String uneVille, Calendar uneDate, int unTarif, String unTransport) {
+            villeDepart = uneVille;
+            dateDepart = uneDate;
+            tarif = unTarif;
+            transportAerien = unTransport;            
+        }
 }

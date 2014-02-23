@@ -6,28 +6,33 @@ package ifroutarde.modele;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author alicia
  */
+@Entity
 public abstract class Voyage 
 {
-    
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private String nom; 
     private String description;
-    private int durée; //La durée est en jours
+    private int duree; //La durée est en jours
     private ArrayList <periodeTarif> tarifs;
     
-    class periodeTarif
+    public Voyage ()
     {
-        public String villeDepart;
-        public Calendar dateDepart;
-        public int tarif;
-        public String transportAerien;
-        
-        public periodeTarif (String uneVille, Calendar uneDate, int unTarif, String unTransport) {
-            
-        }
     }
     
+    public Voyage (String unNom, String uneDescription, int uneDurée, ArrayList<periodeTarif> desTarifs)
+    {
+        nom = unNom;
+        description = uneDescription;
+        duree = uneDurée;
+        tarifs = desTarifs;
+    }
 }

@@ -4,11 +4,18 @@
  */
 package ifroutarde.view;
 
+import ifroutarde.modele.Circuit;
 import ifroutarde.modele.Client;
 import ifroutarde.modele.Conseiller;
+import ifroutarde.modele.Pays;
+import ifroutarde.modele.Sejour;
+import ifroutarde.modele.Voyage;
+import ifroutarde.modele.periodeTarif;
 import ifroutarde.service.ServiceClient;
 import ifroutarde.service.ServiceConseiller;
+import ifroutarde.service.ServicePays;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -22,41 +29,61 @@ public class IfRoutarde {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Client [] clients = new Client [10];
+        //Création des différents objets
+        //Clients
         Calendar date = Calendar.getInstance();
         date.set(1992, 9, 28);
         Client alicia = new Client ( "Mlle", "Parisse", "Alicia", date , "au paradis", "lololo@yahoo.com", "0123456789");
         date.set(1991, 8, 14);
         Client jean = new Client ( "Saint", "Marchal", "Jean", date , "dans ton cul", "jesuisuncon@orange.fr", "9876543210");
         
-
+        //Pays
         Pays aliciaLand = new Pays ("aliciaLand", "aliciaVille", 2,2, "Anglais");
         Pays geraldineCountry = new Pays ("geraldineCountry", "geraldineCity", 4, 10, "Québecquois");
-            
+        
+        //Voyages
+        date.set(2014,01,06);
+        periodeTarif pT1 = new periodeTarif("Lyon", date, 3495, "vol régulier");
+        date.set(2014,01,06);
+        periodeTarif pT2 = new periodeTarif("Toulouse", date, 3205, "vol régulier");
+        //Est-ce qu'on pourrait faire une liste ? juste besoin d'une ligne, plus simple. Apparemment différence, pas possibilité d'accès direct élément
+        ArrayList<periodeTarif> lesTarifs = new ArrayList<periodeTarif> ();
+        lesTarifs.add (pT1);
+        lesTarifs.add (pT2);
+        Voyage sejour1 = new Sejour ("Patagonie", "Nom magique qui vous transporte et vous permet blabla.", 14, lesTarifs, "Hotel 4 étoiles avec piscine"); 
+        ArrayList<String> lesTransports = new ArrayList<String> ();
+        lesTransports.add("bus");
+        lesTransports.add("train");
+        Voyage circuit1 = new Circuit ("De la Patagonie à la Terre de Feu", "Découverte exceptionnelle de gands espaces et paysages", 7, lesTarifs, lesTransports, 700);
+        
+        //Tests de persistance pour les différentes classes
+        
+        //Client
         ServiceClient serviceTest = new ServiceClient();
         serviceTest.enregistrerClient(alicia);
         serviceTest.enregistrerClient(jean);
+        afficherTousClients (serviceTest);
+        afficherClientsNom (serviceTest,"Parisse"); 
         
+        //Conseiller
         List<Client> listTemp = serviceTest.getBackClients();
         Conseiller paul = new Conseiller ( listTemp, "Lavalle", "Paul", "bouh@toto.fr" );
         Conseiller thomas = new Conseiller ( listTemp, "Cheval", "Thomas", "Bah@titi.fr" );
-        
         ServiceConseiller serviceTestCons = new ServiceConseiller();
         serviceTestCons.enregistrerConseiller(paul);
         serviceTestCons.enregistrerConseiller(thomas);
+        afficherTousConseillers (serviceTestCons);
+        afficherConseillersNom (serviceTestCons, "Paul");
         
-        afficherTousClients (serviceTest);
-        afficherClientsNom (serviceTest,"Parisse");
-        
+        //Pays
         ServicePays serviceTest2 = new ServicePays(); 
         serviceTest2.enregistrerPays(aliciaLand);
-        serviceTest2.enregistrerPays(geraldineCountry);
-        
+        serviceTest2.enregistrerPays(geraldineCountry);        
         afficherTousPays(serviceTest2);
         afficherPaysId(serviceTest2, aliciaLand.getIdPays());
         
-        afficherTousConseillers (serviceTestCons);
-        afficherConseillersNom (serviceTestCons, "Paul");
+        //Voyages 
+        
     }
     
     public static void afficherTousClients (ServiceClient unService)

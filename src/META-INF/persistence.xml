@@ -4,6 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ifroutarde.modele.Client</class>
     <class>ifroutarde.modele.Conseiller</class>
+    <class>ifroutarde.modele.Pays</class>
+    <class>ifroutarde.modele.Circuit</class>
+    <class>ifroutarde.modele.Voyage</class>
+    <class>ifroutarde.modele.Sejour</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/LaBase"/>
       <property name="javax.persistence.jdbc.password" value="lol"/>
