@@ -5,27 +5,26 @@
 package ifroutarde.service;
 
 import ifroutarde.dao.JpaUtil;
-import ifroutarde.dao.PaysDao;
-import ifroutarde.dao.PaysDaoJpa;
-import ifroutarde.modele.Pays;
+import ifroutarde.dao.PeriodeTarifDao;
+import ifroutarde.dao.PeriodeTarifDaoJpa;
+import ifroutarde.modele.PeriodeTarif;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Marchal & Parisse
+ * @author alicia
  */
-public class ServicePays {
+public class ServicePeriodeTarif {
+    private PeriodeTarifDao periodeTarifDao = new PeriodeTarifDaoJpa();
     
-    private PaysDao paysDao = new PaysDaoJpa();
-    
-    public void enregistrerPays (Pays pays)
+    public void enregistrerPeriodeTarif (PeriodeTarif periodeTarif)
     {
         JpaUtil.creerEntityManager();
         try
         {
             JpaUtil.ouvrirTransaction();
-            paysDao.createPays(pays);
+            periodeTarifDao.createPeriodeTarif(periodeTarif);
             JpaUtil.validerTransaction();
         }
         catch (Exception e) 
@@ -39,13 +38,13 @@ public class ServicePays {
         }
     }
     
-    public List<Pays> getBackPays ()
+    public List<PeriodeTarif> getBackPeriodeTarif ()
     {
-        List<Pays> resultat = new ArrayList <Pays> ();
+        List<PeriodeTarif> resultat = new ArrayList <PeriodeTarif> ();
         JpaUtil.creerEntityManager();
         try
-        {
-            resultat = paysDao.findAllPays();
+        {   
+            resultat = periodeTarifDao.findAllPeriodeTarif();
         }
         catch (Exception e) 
         {
@@ -58,13 +57,13 @@ public class ServicePays {
         return resultat;
     }
     
-    public Pays getBackPaysById (Long unId)
+    public PeriodeTarif getBackPeriodeTarifByPrix (int unPrix)
     {
-        Pays pays = null;
+        PeriodeTarif periodeTarif = null;
         JpaUtil.creerEntityManager();
         try
         {
-           pays = paysDao.findPaysById(unId);
+            periodeTarif = (PeriodeTarif) periodeTarifDao.findPeriodeTarifByPrix(unPrix);
         }
         catch (Exception e) 
         {
@@ -74,8 +73,6 @@ public class ServicePays {
         {
             JpaUtil.fermerEntityManager();
         }
-        return pays;
+        return periodeTarif;
     }
-    
-    
 }

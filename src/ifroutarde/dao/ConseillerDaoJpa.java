@@ -20,6 +20,13 @@ public class ConseillerDaoJpa implements ConseillerDao{
     }
 
     @Override
+    public void updateConseiller(Conseiller conseiller)
+    {
+        JpaUtil.obtenirEntityManager().merge(conseiller);
+    }
+    
+
+    @Override
     public void deleteConseiller(Conseiller conseiller) {
         JpaUtil.obtenirEntityManager().remove(conseiller);
     }

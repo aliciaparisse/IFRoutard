@@ -22,7 +22,7 @@ public class Circuit extends Voyage
     {   
     }
     
-    public Circuit (String unNom, String uneDescription, Pays unPays, int uneDurée, ArrayList<periodeTarif> desTarifs, ArrayList <String> desMoyens, int uneDistance)
+    public Circuit (String unNom, String uneDescription, Pays unPays, int uneDurée, ArrayList<PeriodeTarif> desTarifs, ArrayList <String> desMoyens, int uneDistance)
     {
         super (unNom, uneDescription, unPays, uneDurée, desTarifs);
         moyensTransp = desMoyens;

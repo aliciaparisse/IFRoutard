@@ -15,23 +15,27 @@ import java.util.List;
  *
  * @author Marchal & Parisse
  */
-public class ServiceClient {
+public class ServiceClient 
+{
     
-    private ClientDao mecDao = new ClientDaoJpa();    
+    private ClientDao monsieurDao = new ClientDaoJpa();    
     
     public void enregistrerClient (Client client)
     {
-        try{
-            JpaUtil.creerEntityManager();
+        JpaUtil.creerEntityManager();
+        try
+        {            
             JpaUtil.ouvrirTransaction();
-            mecDao.createClient(client);
+            monsieurDao.createClient(client);
             JpaUtil.validerTransaction();
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
             JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
     }
@@ -39,15 +43,17 @@ public class ServiceClient {
     public List<Client> getBackClients ()
     {
         List<Client> resultat = new ArrayList <Client> ();
-        try{
-            JpaUtil.creerEntityManager();
-            resultat = mecDao.findAllClient();
+        JpaUtil.creerEntityManager();
+        try
+        {
+            resultat = monsieurDao.findAllClient();
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return resultat;
@@ -56,15 +62,17 @@ public class ServiceClient {
     public Client getBackClientById (Long unId)
     {
         Client client = null;
-        try{
-            JpaUtil.creerEntityManager();
-            client = mecDao.findClientById(unId);
+        JpaUtil.creerEntityManager();
+        try
+        {
+            client = monsieurDao.findClientById(unId);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return client;
@@ -73,15 +81,17 @@ public class ServiceClient {
     public List<Client> getBackClientByNom (String nomClient)
     {
         List<Client> clients = new ArrayList <Client> ();
-        try{
-            JpaUtil.creerEntityManager();
-            clients = mecDao.findClientByNomClient(nomClient);
+        JpaUtil.creerEntityManager();
+        try
+        {
+            clients = monsieurDao.findClientByNomClient(nomClient);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return clients;

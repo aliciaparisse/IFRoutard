@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface ConseillerDao {
     public void createConseiller (Conseiller conseiller);
+    public void updateConseiller (Conseiller conseiller);
     public void deleteConseiller (Conseiller conseiller);
     public List<Conseiller> findAllConseiller ();
     public Conseiller findConseillerById (Long numConseiller);

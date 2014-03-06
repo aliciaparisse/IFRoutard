@@ -4,10 +4,12 @@
  */
 package ifroutarde.modele;
 
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * 
@@ -22,8 +24,9 @@ public class Pays {
     private String nom;
     private String capitale;
     private int nbHab;
+   
     private int superficie; //La superficie est en km²
-    private String langue;
+    private String langue; 
     
     public Pays()
     {

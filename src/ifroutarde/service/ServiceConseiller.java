@@ -20,8 +20,8 @@ public class ServiceConseiller {
     
     public void enregistrerConseiller (Conseiller conseiller)
     {
+        JpaUtil.creerEntityManager();
         try{
-            JpaUtil.creerEntityManager();
             JpaUtil.ouvrirTransaction();
             monsieurDao.createConseiller(conseiller);
             JpaUtil.validerTransaction();
@@ -38,15 +38,17 @@ public class ServiceConseiller {
     public List<Conseiller> getBackConseillers ()
     {
         List<Conseiller> resultat = new ArrayList <Conseiller> ();
-        try{
-            JpaUtil.creerEntityManager();
+        JpaUtil.creerEntityManager();
+        try
+        {
             resultat = monsieurDao.findAllConseiller();
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return resultat;
@@ -55,15 +57,17 @@ public class ServiceConseiller {
     public Conseiller getBackConseillerById (Long unId)
     {
         Conseiller client = null;
-        try{
-            JpaUtil.creerEntityManager();
+        JpaUtil.creerEntityManager();
+        try
+        {
             client = monsieurDao.findConseillerById(unId);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return client;
@@ -72,15 +76,17 @@ public class ServiceConseiller {
     public List<Conseiller> getBackConseillerByNom (String nomConseiller)
     {
         List<Conseiller> conseillers = new ArrayList <Conseiller> ();
-        try{
-            JpaUtil.creerEntityManager();
+        JpaUtil.creerEntityManager();
+        try
+        {
             conseillers = monsieurDao.findConseillerByNomConseiller(nomConseiller);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             e.printStackTrace();
-            JpaUtil.annulerTransaction();
         }
-        finally {
+        finally 
+        {
             JpaUtil.fermerEntityManager();
         }
         return conseillers;

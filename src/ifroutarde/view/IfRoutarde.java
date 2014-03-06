@@ -7,13 +7,17 @@ package ifroutarde.view;
 import ifroutarde.modele.Circuit;
 import ifroutarde.modele.Client;
 import ifroutarde.modele.Conseiller;
+import ifroutarde.modele.Devis;
 import ifroutarde.modele.Pays;
 import ifroutarde.modele.Sejour;
 import ifroutarde.modele.Voyage;
-import ifroutarde.modele.periodeTarif;
+import ifroutarde.modele.PeriodeTarif;
 import ifroutarde.service.ServiceClient;
 import ifroutarde.service.ServiceConseiller;
+import ifroutarde.service.ServiceDevis;
 import ifroutarde.service.ServicePays;
+import ifroutarde.service.ServicePeriodeTarif;
+import ifroutarde.service.ServiceVoyage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +34,9 @@ public class IfRoutarde {
      */
     public static void main(String[] args) {
         //Création des différents objets
+        //
+        //
+        
         //Clients
         Calendar date = Calendar.getInstance();
         date.set(1992, 9, 28);
@@ -41,22 +48,30 @@ public class IfRoutarde {
         Pays aliciaLand = new Pays ("aliciaLand", "aliciaVille", 2,2, "Anglais");
         Pays geraldineCountry = new Pays ("geraldineCountry", "geraldineCity", 4, 10, "Québecquois");
         
-        //Voyages
+        //PeriodeTarif
         date.set(2014,01,06);
-        periodeTarif pT1 = new periodeTarif("Lyon", date, 3495, "vol régulier");
+        PeriodeTarif pT1 = new PeriodeTarif("Lyon", date, 3495, "vol régulier");
         date.set(2014,01,06);
-        periodeTarif pT2 = new periodeTarif("Toulouse", date, 3205, "vol régulier");
+        PeriodeTarif pT2 = new PeriodeTarif("Toulouse", date, 3205, "vol régulier");
         //Est-ce qu'on pourrait faire une liste ? juste besoin d'une ligne, plus simple. Apparemment différence, pas possibilité d'accès direct élément
-        ArrayList<periodeTarif> lesTarifs = new ArrayList<periodeTarif> ();
+        ArrayList<PeriodeTarif> lesTarifs = new ArrayList<PeriodeTarif> ();
         lesTarifs.add (pT1);
         lesTarifs.add (pT2);
+        
+        //Voyages
         Voyage sejour1 = new Sejour ("Patagonie", "Nom magique qui vous transporte et vous permet blabla.", aliciaLand, 14, lesTarifs, "Hotel 4 étoiles avec piscine"); 
         ArrayList<String> lesTransports = new ArrayList<String> ();
         lesTransports.add("bus");
         lesTransports.add("train");
         Voyage circuit1 = new Circuit ("De la Patagonie à la Terre de Feu", "Découverte exceptionnelle de gands espaces et paysages", geraldineCountry, 7, lesTarifs, lesTransports, 700);
         
+        //Devis
+        
+        
+        
         //Tests de persistance pour les différentes classes
+        //
+        //
         
         //Client
         ServiceClient serviceTest = new ServiceClient();
@@ -65,16 +80,6 @@ public class IfRoutarde {
         afficherTousClients (serviceTest);
         afficherClientsNom (serviceTest,"Parisse"); 
         
-        //Conseiller
-        List<Client> listTemp = serviceTest.getBackClients();
-        Conseiller paul = new Conseiller ( listTemp, "Lavalle", "Paul", "bouh@toto.fr" );
-        Conseiller thomas = new Conseiller ( listTemp, "Cheval", "Thomas", "Bah@titi.fr" );
-        ServiceConseiller serviceTestCons = new ServiceConseiller();
-        serviceTestCons.enregistrerConseiller(paul);
-        serviceTestCons.enregistrerConseiller(thomas);
-        afficherTousConseillers (serviceTestCons);
-        afficherConseillersNom (serviceTestCons, "Paul");
-        
         //Pays
         ServicePays serviceTest2 = new ServicePays(); 
         serviceTest2.enregistrerPays(aliciaLand);
@@ -82,10 +87,91 @@ public class IfRoutarde {
         afficherTousPays(serviceTest2);
         afficherPaysId(serviceTest2, aliciaLand.getIdPays());
         
+        //Conseiller
+        List<Pays> listTemp = serviceTest2.getBackPays();
+        Conseiller paul = new Conseiller ( listTemp, "Lavalle", "Paul", "bouh@toto.fr" );
+        Conseiller thomas = new Conseiller ( listTemp, "Cheval", "Thomas", "Bah@titi.fr" );
+        ServiceConseiller serviceTestCons = new ServiceConseiller();
+        serviceTestCons.enregistrerConseiller(paul);
+        serviceTestCons.enregistrerConseiller(thomas);
+        afficherTousConseillers (serviceTestCons);
+        afficherConseillersNom (serviceTestCons, "Lavalle");
+        
+        
+        //PeriodeTarif
+        ServicePeriodeTarif serviceTest4 = new ServicePeriodeTarif();
+        serviceTest4.enregistrerPeriodeTarif(pT1);
+        serviceTest4.enregistrerPeriodeTarif(pT2);        
+        
         //Voyages 
+        ServiceVoyage serviceTest3 = new ServiceVoyage();
+        serviceTest3.enregistrerVoyage(sejour1);
+        serviceTest3.enregistrerVoyage(circuit1);
+        afficherTousVoyages(serviceTest3);
+        afficherTousSejours(serviceTest3);
+        afficherVoyageByPays(serviceTest3, aliciaLand);
+        
+        //Devis
+        Devis devis1 = new Devis (1000, 2, alicia, thomas, sejour1);
+        Devis devis2 = new Devis (2000, 4, jean, paul, circuit1);
+        ServiceDevis serviceTest5 = new ServiceDevis();
+        serviceTest5.enregistrerDevis(devis1);
+        serviceTest5.enregistrerDevis(devis2);
+        afficherDevisByClient(serviceTest5, alicia);
         
     }
     
+    public static void afficherDevisByClient(ServiceDevis unService, Client unClient)
+    {
+        List<Devis> resultat = unService.getBackDevisByClients(unClient);
+        for (int i = 0; i<resultat.size(); i++)
+        {
+            Devis devis = resultat.get(i);
+            
+            int tarif = devis.getTarifD();
+            System.out.println(tarif);
+        }
+    }
+    
+    public static void afficherVoyageByPays(ServiceVoyage unService, Pays unPays)
+    {
+        List<Voyage> resultat = unService.getBackVoyagesByPays(unPays);
+        for (int i = 0; i<resultat.size(); i++)
+        {
+            Voyage voyage = resultat.get(i);
+            
+            String nom = voyage.getNom();
+            System.out.println(nom);
+        }
+    }
+    
+    public static void afficherTousVoyages (ServiceVoyage unService)
+    {
+        List<Voyage> resultat = unService.getBackVoyages();
+        for (int i = 0; i<resultat.size(); i++)
+        {
+            Voyage voyage = resultat.get(i);
+            
+            String nom = voyage.getNom();
+            System.out.println(nom);
+        }
+        
+    }
+    
+    public static void afficherTousSejours (ServiceVoyage unService)
+    {
+        List<Sejour> resultat = unService.getBackAllSejours();
+        for (int i = 0; i<resultat.size(); i++)
+        {
+            Voyage voyage = resultat.get(i);
+            
+            String nom = voyage.getNom();
+            System.out.println(nom);
+        }
+        
+    }
+   
+            
     public static void afficherTousClients (ServiceClient unService)
     {
         List<Client> resultat = unService.getBackClients();
@@ -192,8 +278,9 @@ public class IfRoutarde {
             String leNom = conseiller.getNom();
             String lePrenom = conseiller.getPrenom();
             String lAdrMail = conseiller.getAdrMail();
-            List<Client> listClient = conseiller.getClientsAttribues();
-            //List<Pays> listPays = conseiller.getPaysSpecialises();
+            //List<Client> listClient = conseiller.getClientsAttribues();
+            List<Pays> listPays = conseiller.getPaysSpecialises();
+            List<Devis> listDevis = conseiller.getLesDevis();
     
             System.out.println( leNom + " " + lePrenom );
             System.out.println( lAdrMail );
